@@ -1,8 +1,26 @@
 import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class NfaToDfa {
+    public static <T> Set<Set<T>> powerSet(Set<T> originalSet) {
+        Set<Set<T>> sets = new HashSet<Set<T>>();
+        if (originalSet.isEmpty()) {
+            sets.add(new HashSet<T>());
+            return sets;
+        }
+        List<T> list = new ArrayList<T>(originalSet);
+        T head = list.get(0);
+        Set<T> rest = new HashSet<T>(list.subList(1, list.size()));
+        for (Set<T> set : powerSet(rest)) {
+            Set<T> newSet = new HashSet<T>();
+            newSet.add(head);
+            newSet.addAll(set);
+            sets.add(newSet);
+            sets.add(set);
+        }
+        return sets;
+    }
+
     public static void main(String[] arg)throws FileNotFoundException {
         Scanner var1 = new Scanner(System.in);
         System.out.print("NFA specification file name: ");
@@ -13,6 +31,9 @@ public class NfaToDfa {
             System.out.println("DFA: ");
             nfa nfa_dfa=new nfa();
             Set<String> ts= current_nfa.getQ();
+            Set<Set<String>> power=powerSet(ts);
+
+            nfa_dfa.setQ(power);
             //TO-DO: create power set
             System.out.print("Q_ ="+nfa_dfa.getQ());
             //set is power set

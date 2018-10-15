@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class nfa {
-    Set<String> Q;
+    Set<Set<String> Q;
     //finite set of states
     Set<String> Sigma;
     //a finiite alphabet
@@ -149,7 +149,7 @@ public class nfa {
         return Q;
     }
 
-    public void setQ(Set<String> q) {
+    public void setQ(Set<Set<String>> q) {
         Q = q;
     }
 
@@ -186,7 +186,10 @@ public class nfa {
         return accept;
     }
 
-    public void setAccept(Set<String> accept) {
+    public void setAccept(String accept) {
+        for(String state: this.Q){
+
+        }
         this.accept = accept;
     }
 
@@ -200,5 +203,4 @@ public class nfa {
 
         return true;
     }
-
 }
