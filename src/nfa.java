@@ -1,3 +1,5 @@
+import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -133,6 +135,61 @@ public class nfa {
                 }
             }
     }
+
+    public nfa() {
+        this.accept=null;
+        this.start=null;
+        this.Q=null;
+        this.delta=null;
+        this.Sigma=null;
+
+    }
+
+    public Set<String> getQ() {
+        return Q;
+    }
+
+    public void setQ(Set<String> q) {
+        Q = q;
+    }
+
+    public Set<String> getSigma() {
+        return Sigma;
+    }
+
+    public void setSigma(Set<String> sigma) {
+        for(String i: sigma){
+            if(i.equals(".")){
+                sigma.remove(i);
+            }
+        }
+        Sigma = sigma;
+    }
+
+    public Map<String, String> getDelta() {
+        return delta;
+    }
+
+    public void setDelta(Map<String, String> delta) {
+        this.delta = delta;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public Set<String> getAccept() {
+        return accept;
+    }
+
+    public void setAccept(Set<String> accept) {
+        this.accept = accept;
+    }
+
     private boolean legalState(String var1) {
         for(int var2 = 0; var2 < var1.length(); ++var2) {
             char var3 = var1.charAt(var2);
@@ -143,4 +200,5 @@ public class nfa {
 
         return true;
     }
+
 }
